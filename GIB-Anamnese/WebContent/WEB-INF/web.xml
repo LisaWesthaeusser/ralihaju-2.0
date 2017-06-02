@@ -22,7 +22,7 @@
 		<servlet-name>AnamnesebogenAServlet</servlet-name>
 		<url-pattern>/anamnesebogenAnaesthesie</url-pattern>
 	</servlet-mapping>
-	<servlet>
+		<servlet>
 		<servlet-name>AnamnesebogenOServlet</servlet-name>
 		<servlet-class>htwg.in.gib.anam.AnamnesebogenOServlet</servlet-class>
 	</servlet>
@@ -30,4 +30,5 @@
 		<servlet-name>AnamnesebogenOServlet</servlet-name>
 		<url-pattern>/anamnesebogenOrthopaedie</url-pattern>
 	</servlet-mapping>
+
 </web-app>

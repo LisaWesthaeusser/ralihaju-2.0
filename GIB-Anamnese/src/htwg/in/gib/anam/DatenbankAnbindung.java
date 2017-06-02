@@ -18,7 +18,7 @@ public class DatenbankAnbindung {
 		bogen.setId(id);
 		
 		try {
-			con = DriverManager.getConnection("jdbc:sqlite:war/WEB-INF/Datenbank.db");
+			con = DriverManager.getConnection("jdbc:sqlite:/WEB-INF/Datenbank.db");
 			st = con.createStatement();
 			result = st.executeQuery("SELECT * FROM BoBogen WHERE BoID = " + id);
 

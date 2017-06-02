@@ -1,6 +1,7 @@
 package htwg.in.gib.anam;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -29,6 +30,7 @@ public class AnamnesebogenAServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		String vorname = req.getParameter("Vorname");
 		String nachname = req.getParameter("Nachname");
 		String antwortGeschlecht = req.getParameter("Geschlecht");
@@ -86,15 +88,15 @@ public class AnamnesebogenAServlet extends HttpServlet {
 		String nachricht002 = req.getParameter("Nachricht02");
 		String nachricht003 = req.getParameter("Nachricht03");
 
-		resp.setContentType("text/html");
-		PrintWriter writer = resp.getWriter();
-		String htmlResp = "<html>";
-		htmlResp += "<head>";
-		htmlResp += "<body>";
-	    htmlResp +=  "<h2>Vorname des Patienten: " + vorname + "</h2>";
-		htmlResp += "<h2>Nachname des Patienten: " + nachname + "</h2>";
-		htmlResp += "</html>";
-		writer.println(htmlResp);
+		resp.setContentType("application/pdf");
+		String htmlResp = "";
+		htmlResp += "Vorname des Patienten: " + vorname;
+		htmlResp += "\nNachname des Patienten: " + nachname;
+		htmlResp += "\nGeschlecht des Patienten: " + antwortGeschlecht;
+		htmlResp += "\nGeburtsdatum des Patienten: " + gebDat;
+
+		OutputStream os = resp.getOutputStream();
+		PDF_Generierung.pdfGenerieren(htmlResp, os);
 	}
 
 }

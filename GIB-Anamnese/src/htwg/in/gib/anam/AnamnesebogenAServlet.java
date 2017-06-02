@@ -91,9 +91,10 @@ public class AnamnesebogenAServlet extends HttpServlet {
 		String nachricht002 = req.getParameter("Nachricht02");
 		String nachricht003 = req.getParameter("Nachricht03");
 		
+		Bogen bogen = new Bogen();
 		String bogenId = req.getParameter("Vorname");
 		DatenbankAnbindung dba = new DatenbankAnbindung();
-		Bogen bogen = dba.readBogen(bogenId);
+		bogen = dba.readBogen(bogenId);
 
 		resp.setContentType("application/pdf");
 		String htmlResp = "";

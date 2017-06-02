@@ -18,7 +18,7 @@ public class DatenbankAnbindung {
 		bogen.setId(id);
 		
 		try {
-			con = DriverManager.getConnection("jdbc:sqlite:/WEB-INF/Datenbank.db");
+			con = DriverManager.getConnection("jdbc:sqlite:WebContent/WEB-INF/Datenbank.db");
 			st = con.createStatement();
 			result = st.executeQuery("SELECT * FROM BoBogen WHERE BoID = " + id);
 
@@ -45,6 +45,6 @@ public class DatenbankAnbindung {
 		DatenbankAnbindung dba = new DatenbankAnbindung();
 		bogen = dba.readBogen("1");
 		System.out.println(bogen.getFrage1());
-		
 	}
+	
 }

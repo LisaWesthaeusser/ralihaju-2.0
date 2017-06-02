@@ -16,7 +16,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>AnamnesebogenAServlet</servlet-name>
-		<servlet-class>src.htwg.in.gib.anamnese.AnamnesebogenAServlet</servlet-class>
+		<servlet-class>htwg.in.gib.anam.AnamnesebogenAServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>AnamnesebogenAServlet</servlet-name>

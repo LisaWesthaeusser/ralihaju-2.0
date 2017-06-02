@@ -1,7 +1,5 @@
 package htwg.in.gib.anam;
 
-import java.io.OutputStream;
-
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Paragraph;

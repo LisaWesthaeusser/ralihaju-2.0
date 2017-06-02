@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import htwg.in.gib.anam.Bogen;
+import htwg.in.gib.anam.DatenbankAnbindung;
+
 /**
  * Servlet implementation class AnamnesebogenAServlet
  */
@@ -87,10 +90,14 @@ public class AnamnesebogenAServlet extends HttpServlet {
 		String nachricht001 = req.getParameter("Nachricht01");
 		String nachricht002 = req.getParameter("Nachricht02");
 		String nachricht003 = req.getParameter("Nachricht03");
+		
+		String bogenId = req.getParameter("Vorname");
+		DatenbankAnbindung dba = new DatenbankAnbindung();
+		Bogen bogen = dba.readBogen(bogenId);
 
 		resp.setContentType("application/pdf");
 		String htmlResp = "";
-		htmlResp += "Vorname des Patienten: " + vorname;
+		htmlResp += "Frage 1 aus Bogen: " + bogen.getFrage1();
 		htmlResp += "\nNachname des Patienten: " + nachname;
 		htmlResp += "\nGeschlecht des Patienten: " + antwortGeschlecht;
 		htmlResp += "\nGeburtsdatum des Patienten: " + gebDat;

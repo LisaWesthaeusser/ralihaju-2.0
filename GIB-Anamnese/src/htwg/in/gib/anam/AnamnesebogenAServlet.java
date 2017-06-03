@@ -94,11 +94,14 @@ public class AnamnesebogenAServlet extends HttpServlet {
 		Bogen bogen = new Bogen();
 		String bogenId = req.getParameter("Vorname");
 		DatenbankAnbindung dba = new DatenbankAnbindung();
-		bogen = dba.readBogen(bogenId);
+		
+			bogen = dba.readBogen("1");
+		
+		String frage = bogen.getFrage1();
 
 		resp.setContentType("application/pdf");
 		String htmlResp = "";
-		htmlResp += "Frage 1 aus Bogen: " + bogen.getFrage1();
+		htmlResp += "Frage 1 aus Bogen: " + frage;
 		htmlResp += "\nNachname des Patienten: " + nachname;
 		htmlResp += "\nGeschlecht des Patienten: " + antwortGeschlecht;
 		htmlResp += "\nGeburtsdatum des Patienten: " + gebDat;

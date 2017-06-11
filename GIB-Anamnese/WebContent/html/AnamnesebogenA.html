@@ -41,8 +41,18 @@
 			document.absenden.Ort.focus();
 			return false;
 		}
-	
+		
 	}
+	function checkForm(form)
+	  {
+	   
+	    if(!form.Datenschutz.checked) {
+	      alert("Bitte akzeptieren Sie die Datenschutzbestimmungen!");
+	      form.Datenschutz.focus();
+	      return false;
+	    }
+	    return true;
+	  }
 
 	 </script>
 </head>
@@ -68,7 +78,7 @@
 			<p class="unterschrift">Bitte füllen Sie alles aus</p>
 			
 			<form name="absenden" method="post"
-				action="/GIB-Anamnese/anamnesebogenAnaesthesie">
+				action="/GIB-Anamnese/anamnesebogenAnaesthesie" onsubmit="return checkForm(this);">
 				<div class="frage">
 					Vorname<span style="display: inline-block; width: 100px;color:red;">*</span><input
 						type="text" id="Textfeld" name="Vorname" required pattern="[A-za-z]{2,20}+" >

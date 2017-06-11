@@ -42,6 +42,16 @@
 			return false;
 		}
 	}
+	function checkForm(form)
+	  {
+	   
+	    if(!form.Datenschutz.checked) {
+	      alert("Bitte akzeptieren Sie die Datenschutzbestimmungen!");
+	      form.Datenschutz.focus();
+	      return false;
+	    }
+	    return true;
+	  }
 
 	 </script>
 </head>
@@ -68,7 +78,7 @@
 			<p class="unterschrift">Bitte füllen Sie alles aus</p>
 
 			<form name="absenden" method="post"
-				action="/GIB-Anamnese/anamnesebogenOrthopaedie">
+				action="/GIB-Anamnese/anamnesebogenOrthopaedie" onsubmit="return checkForm(this);">
 
 				<div class="frage">
 					Vorname<span style="display: inline-block; width: 100px;color:red;">*</span><input

@@ -5,18 +5,44 @@
 <title>Online Anamnese</title>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="../css/Style.css">
-<script type="text/javascript">
-function senden(){
-	
-if (id == 'senden') {
-	  var name = document.getElementsByName('Nachname')[0];
-	  var prename = document.getElementsByName('Vorname')[0];
-	  var birthdate = document.getElementsByName('gebDat')[0];
-	  
-	  if (name.value.length == 0 || name.value.length == 0 || birthdate.value.length == 0) {
-		  alert('Bitte alle Pflichtfelder ausfüllen');
-		  return false;
-	  }
+<script>
+
+	var elem = document.getElementById('senden');
+	elem.addEventListener('click', absenden);
+
+	function Senden() {
+		if (document.absenden.Vorname.value == "") {
+			alert("Bitte Ihren Vornamen eingeben!");
+			document.absenden.Vorname.focus();
+			return false;
+		}
+		if (document.absenden.Nachname.value == "") {
+			alert("Bitte Ihren Nachamen eingeben!");
+			document.absenden.Nachname.focus();
+			return false;
+		}
+		if (document.absenden.gebDat.value == "") {
+			alert("Bitte Ihren Geburtsdatum eingeben!");
+			document.absenden.gebDat.focus();
+			return false;
+		}
+		if (document.absenden.Str.value == "") {
+			alert("Bitte Ihre Straße eingeben!");
+			document.absenden.Str.focus();
+			return false;
+		}
+		if (document.absenden.PLZ.value == "") {
+			alert("Bitte Ihre PLZ eingeben!");
+			document.absenden.PLZ.focus();
+			return false;
+		}
+		if (document.absenden.Ort.value == "") {
+			alert("Bitte Ihren Ort eingeben!");
+			document.absenden.Ort.focus();
+			return false;
+		}
+	}
+
 	 </script>
 </head>
 <body>
@@ -480,9 +506,9 @@ if (id == 'senden') {
 
 				</div>
 				<br>
-				<br> <input id="senden" type="submit" value="Absenden">
+				<br> <input id="senden" type="submit" value="Absenden" onclick="Senden();">
 			</form>
-			<a href=../html/Anamnesebogen.html><button id="zurückUnten" onclick='senden' >zurück</button></a>
+			<a href=../html/Anamnesebogen.html><button id="zurückUnten"  >zurück</button></a>
 
 			<br> <br>
 		</div>

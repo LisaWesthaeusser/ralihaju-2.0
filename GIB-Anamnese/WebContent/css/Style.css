@@ -332,3 +332,10 @@ textarea {
   input:invalid {
 	border: 1px solid red;
 }
+.pflichtfelder{
+	font-family: sans-serif;
+	font-size: xx-small;
+	color: #424242;
+	padding-left: 10px;
+	padding-top: 5px;	
+}

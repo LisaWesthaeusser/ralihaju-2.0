@@ -37,27 +37,4 @@ public class PDF_Generierung {
 	 document.close();
 	 }
 
-//	public void barcode() {
-//
-//		ByteArrayOutputStream bout = QRCode.from("www.amazon.de").withSize(250, 250).to(ImageType.PNG).stream();
-//
-//		try {
-//			FileOutputStream out = new FileOutputStream("img/barcode.jpg");
-//			out.write(bout.toByteArray());
-//			out.flush();
-//			out.close();
-//
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
-//
-//	public static void main(String[] args) {
-//		PDF_Generierung p = new PDF_Generierung();
-//		p.barcode();
-//
-//	}
-
 }

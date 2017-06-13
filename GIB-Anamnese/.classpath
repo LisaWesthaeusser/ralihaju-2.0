@@ -11,6 +11,8 @@
 	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/com.lowagie.text-2.1.7.jar"/>
 	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/sqlite-jdbc-3.16.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Jülide/Downloads/aspose-barcode-17.4-java/lib/aspose-barcode-17.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Jülide/Downloads/core-2.0.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_25"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Jülide/Downloads/javase-2.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

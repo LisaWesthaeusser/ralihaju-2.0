@@ -25,7 +25,7 @@ public class DatenbankAnbindung {
 				e.printStackTrace();
 			}
 			con = DriverManager.getConnection(
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
 			st = con.createStatement();
 			result = st.executeQuery("SELECT * FROM BoBogen WHERE BoID = " + id);
 
@@ -46,32 +46,6 @@ public class DatenbankAnbindung {
 		bog.setId(result.getString("BoID"));
 		return bog;
 	}
-	
-	public void addArzt(String vorname, String nachname, String titel, String username, String passwort){
-		try {
-			try {
-				Class.forName("org.sqlite.JDBC");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			con = DriverManager.getConnection(
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
-			st = con.createStatement();
-			result = st.executeQuery("INSERT INTO ArArzt (ArNachname, ArVorname, ArTitel, ArLogin, ArPasswort) VALUES (" 
-					+ "'" + nachname + "', '"
-					+ vorname + "', '"
-					+ titel + "', '"
-					+ username + "', '"
-					+ passwort + "');");
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-	
 
 	// public static void main(String[] args) {
 	// Bogen bogen = new Bogen();

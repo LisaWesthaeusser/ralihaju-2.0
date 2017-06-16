@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Online Anamnese</title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="../css/Style.css">
+<body>
+	<div class="container">
+
+		<a href=../html/Anamnesebogen.html><img id="Logo"
+			src="../img/GALOGO.png" /></a> <br>
+		<div class="tab">
+
+
+			<a href=../html/Anamnesebogen.html>
+				<button class="tablinks" onclick="openTab(event, 'Anamnesebogen')">Anamnesebogen</button>
+			</a> <a href=../html/Kontakt.html>
+				<button class="tablinks" onclick="openTab(event, 'Kontakt')">Kontakt</button>
+			</a> <a href=../html/Impressum.html><button class="tablinks"
+					onclick="openTab(event, 'Impressum')">Impressum</button></a> <a
+				href=../html/Arzt.html>
+				<button class="tablinks" onclick="openTab(event, 'Arzt')">Arzt</button>
+			</a>
+		</div>
+		<div class="bogen">
+			<a href=../html/Anamnesebogen><button id="zurück">zurück</button></a>
+			<br> <br> <br>
+			<h1>Formular zur Registrierung</h1>
+			<p class="unterschrift">Bitte füllen Sie alles aus</p>
+
+			<form name="absenden" method="post"
+				action="/GIB-Anamnese/registrieren"
+				onsubmit="return checkForm(this);">
+				<div class="frage">
+					Vorname<span
+						style="display: inline-block; width: 100px; color: red;">*</span><input
+						type="text" id="Textfeld" name="Vorname">
+					<p>
+						Nachname<span
+							style="display: inline-block; width: 82px; color: red;">*</span><input
+							type="text" id="Textfeld" name="Nachname">
+					</p>
+					<p>
+						Titel<span style="display: inline-block; width: 82px; color: red;"></span><input
+							type="text" id="Textfeld" name="Titel">
+					</p>
+					<p>
+						Institution<span style="display: inline-block; width: 82px; color: red;"></span><input
+							type="text" id="Textfeld" name="Institution">
+					</p>
+					<p>
+						Straße<span
+							style="display: inline-block; width: 82px; color: red;"></span><input
+							type="text" id="Textfeld" name="Strasse">
+					</p>
+					<p>
+						Hausnummer<span
+							style="display: inline-block; width: 82px; color: red;"></span><input
+							type="text" id="Textfeld" name="Hausnummer">
+					</p>
+					<p>
+						PLZ<span style="display: inline-block; width: 82px; color: red;"></span><input
+							type="text" id="Textfeld" name="PLZ">
+					</p>
+					<p>
+						Ort<span style="display: inline-block; width: 82px; color: red;"></span><input
+							type="text" id="Textfeld" name="Ort">
+					</p>
+					<p>
+						E-Mail-Adresse<span
+							style="display: inline-block; width: 82px; color: red;"></span><input
+							type="text" id="Textfeld" name="E-Mail">
+					</p>
+					<p>
+						Account-Name<span
+							style="display: inline-block; width: 82px; color: red;">*</span><input
+							type="text" id="Textfeld" name="Account-Name">
+					</p>
+					<p>
+						Passwort<span
+							style="display: inline-block; width: 82px; color: red;">*</span><input
+							type="text" id="Textfeld" name="Passwort">
+					</p>
+					<p>
+						Bestätigen Sie Ihr Passwort<span
+							style="display: inline-block; width: 82px; color: red;">*</span><input
+							type="text" id="Textfeld" name="Passwort">
+					</p>
+					<br> <br> <input id="senden" type="submit"
+						value="Absenden" onclick="Senden();">
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>

@@ -25,12 +25,12 @@ public class DatenbankAnbindung {
 				e.printStackTrace();
 			}
 			con = DriverManager.getConnection(
-					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
 			st = con.createStatement();
 			result = st.executeQuery("SELECT * FROM BoBogen WHERE BoID = " + id);
 
 			if (result.next()) {
-				bogen = SQLSelect(id, result);
+				bogen = SQLSelectBogen(id, result);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -39,7 +39,7 @@ public class DatenbankAnbindung {
 		return bogen;
 	}
 
-	private Bogen SQLSelect(String id, ResultSet result) throws SQLException {
+	private Bogen SQLSelectBogen(String id, ResultSet result) throws SQLException {
 
 		Bogen bog = new Bogen();
 		bog.setFrage1(result.getString("BoFrage1"));
@@ -47,11 +47,84 @@ public class DatenbankAnbindung {
 		return bog;
 	}
 
-	// public static void main(String[] args) {
-	// Bogen bogen = new Bogen();
-	// DatenbankAnbindung dba = new DatenbankAnbindung();
-	// bogen = dba.readBogen("1");
-	// System.out.println(bogen.getFrage1());
-	// }
+	public void addArzt(String vorname, String nachname, String titel, String username, String passwort) {
+		try {
+			try {
+				Class.forName("org.sqlite.JDBC");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			con = DriverManager.getConnection(
+					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+			st = con.createStatement();
+			result = st.executeQuery(
+					"INSERT INTO ArArzt (ArNachname, ArVorname, ArTitel, ArLogin, ArPasswort) VALUES (" + "'" + nachname
+							+ "', '" + vorname + "', '" + titel + "', '" + username + "', '" + passwort + "');");
 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public String sucheBenutzer(String username) {
+		String passwort2 = null;
+
+		try {
+			try {
+				Class.forName("org.sqlite.JDBC");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			con = DriverManager.getConnection(
+					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+			st = con.createStatement();
+			result = st.executeQuery("SELECT * FROM ArArzt WHERE ArLogin = '" + username + "';");
+
+			if (result.next()) {
+				passwort2 = SQLSelectPasswort(username, result);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return passwort2;
+	}
+
+	private String SQLSelectPasswort(String username, ResultSet result) throws SQLException {
+		String passwort2 = "";
+		passwort2 = result.getString("ArPasswort");
+
+		return passwort2;
+	}
+
+//	public Bogen[] sucheBogenFuerArzt(int ArID) {
+//		try {
+//			try {
+//				Class.forName("org.sqlite.JDBC");
+//			} catch (ClassNotFoundException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			con = DriverManager.getConnection(
+//					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+//			st = con.createStatement();
+//			result = st.executeQuery(
+//					"INSERT INTO ArArzt (ArNachname, ArVorname, ArTitel, ArLogin, ArPasswort) VALUES (" + "'" + nachname
+//							+ "', '" + vorname + "', '" + titel + "', '" + username + "', '" + passwort + "');");
+//
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//	}
+
+public static void main(String[] args) {
+	DatenbankAnbindung dba = new DatenbankAnbindung();
+	System.out.println(dba.sucheBenutzer("Dr.Huber"));
+}
 }

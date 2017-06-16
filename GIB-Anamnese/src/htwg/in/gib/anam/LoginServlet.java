@@ -24,9 +24,16 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String passwortVergleich = "";
+		
 		String username = request.getParameter("Klinik");
 		String passwort = request.getParameter("Passwort");
+		
+		DatenbankAnbindung dba = new DatenbankAnbindung();
+		passwortVergleich = dba.sucheBenutzer(username);
 
+		if(passwort.equals(passwortVergleich)){
+					
 		response.setContentType("text/html");
 		PrintWriter writer = response.getWriter();
 		String htmlResponse = "<html>";
@@ -38,6 +45,17 @@ public class LoginServlet extends HttpServlet {
 		htmlResponse += "</body>";
 		htmlResponse += "</html>";		
 		writer.println(htmlResponse);
+	
+	} else {
+		response.setContentType("text/html");
+		PrintWriter writer = response.getWriter();
+		String htmlResponse = "<html>";
+		htmlResponse += "<head>";
+		htmlResponse += "<body>";
+	    htmlResponse +=  "<h2> Falsches Passwort! </h2>";
+		htmlResponse += "</body>";
+		htmlResponse += "</html>";		
+		writer.println(htmlResponse);
 	}
-
+	}
 }

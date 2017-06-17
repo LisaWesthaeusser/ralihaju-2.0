@@ -1,4 +1,4 @@
-package htwg.in.gib.anam;
+package htwg.in.gib.anam.control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,14 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LoginServlet
  */
+@SuppressWarnings("serial")
 @WebServlet("/GIB-Anamnese/login")
-public class LoginServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+public class LoginServlet extends AbstractServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

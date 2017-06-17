@@ -1,39 +1,26 @@
-package htwg.in.gib.anam;
+package htwg.in.gib.anam.control;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import htwg.in.gib.anam.Bogen;
-import htwg.in.gib.anam.DatenbankAnbindung;
+import htwg.in.gib.anam.model.Bogen;
+import htwg.in.gib.anam.model.PDF_Generierung;
 
 /**
  * Servlet implementation class AnamnesebogenAServlet
  */
+
+@SuppressWarnings("serial")
 @WebServlet("/GIB-Anamnese/anamnesebogenAnaesthesie")
-public class AnamnesebogenAServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class AnamnesebogenAServlet extends AbstractServlet {
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public AnamnesebogenAServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		String vorname = req.getParameter("Vorname");
 		String nachname = req.getParameter("Nachname");
 		String antwortGeschlecht = req.getParameter("Geschlecht");
@@ -90,24 +77,29 @@ public class AnamnesebogenAServlet extends HttpServlet {
 		String nachricht001 = req.getParameter("Nachricht01");
 		String nachricht002 = req.getParameter("Nachricht02");
 		String nachricht003 = req.getParameter("Nachricht03");
-		
+
 		Bogen bogen = new Bogen();
-		String bogenId = req.getParameter("Vorname");
+		// String bogenId = req.getParameter("Vorname");
 		DatenbankAnbindung dba = new DatenbankAnbindung();
-		
-			bogen = dba.readBogen("1");
-		
-		String frage = bogen.getFrage1();
+		dba.insertIntoStamm(vorname, nachname, antwortGeschlecht, gebDat, strasse, plz, ort);
+		bogen.setId(dba.readStammID());
+
+		// bogen = dba.readBogen("1");
+
+		// String frage = bogen.getFrage1();
 
 		resp.setContentType("application/pdf");
 		String htmlResp = "";
-		htmlResp += "Frage 1 aus Bogen: " + frage;
+		htmlResp += "Vorname des Patienten " + vorname;
 		htmlResp += "\nNachname des Patienten: " + nachname;
 		htmlResp += "\nGeschlecht des Patienten: " + antwortGeschlecht;
 		htmlResp += "\nGeburtsdatum des Patienten: " + gebDat;
+		htmlResp += "\nGeburtsdatum des Patienten: " + strasse;
+		htmlResp += "\nGeburtsdatum des Patienten: " + plz;
+		htmlResp += "\nGeburtsdatum des Patienten: " + ort;
 
 		OutputStream os = resp.getOutputStream();
-		PDF_Generierung.pdfGenerieren(htmlResp, os);
+		PDF_Generierung.pdfGenerieren(htmlResp, os, bogen);
 	}
 
 }

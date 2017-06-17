@@ -1,4 +1,4 @@
-package htwg.in.gib.anam;
+package htwg.in.gib.anam.control;
 
 import java.sql.*;
 

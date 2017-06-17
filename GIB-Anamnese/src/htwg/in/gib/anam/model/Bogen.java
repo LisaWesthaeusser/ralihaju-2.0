@@ -1,12 +1,12 @@
-package htwg.in.gib.anam;
+package htwg.in.gib.anam.model;
 
 public class Bogen {
 		
-		private String id;
+		private int id;
 		private String name;
 		private String frage1;
 
-		public String getId() {
+		public int getId() {
 			return id;
 		}
 
@@ -18,7 +18,7 @@ public class Bogen {
 			return frage1;
 		}
 
-		public void setId(String id) {
+		public void setId(int id) {
 			this.id = id;
 		}
 

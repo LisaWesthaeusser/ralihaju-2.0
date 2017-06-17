@@ -1,4 +1,4 @@
-package htwg.in.gib.anam;
+package htwg.in.gib.anam.control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,17 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class AnamnesebogenOServlet
  */
+@SuppressWarnings("serial")
 @WebServlet("/GIB-Anamnese/anamnesebogenOrthopaedie")
-public class AnamnesebogenOServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public AnamnesebogenOServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+public class AnamnesebogenOServlet extends AbstractServlet{
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

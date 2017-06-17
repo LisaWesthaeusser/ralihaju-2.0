@@ -33,7 +33,7 @@ public class AnamnesebogenAServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
 		String vorname = req.getParameter("Vorname");
 		String nachname = req.getParameter("Nachname");
 		String antwortGeschlecht = req.getParameter("Geschlecht");
@@ -90,29 +90,24 @@ public class AnamnesebogenAServlet extends HttpServlet {
 		String nachricht001 = req.getParameter("Nachricht01");
 		String nachricht002 = req.getParameter("Nachricht02");
 		String nachricht003 = req.getParameter("Nachricht03");
-
+		
 		Bogen bogen = new Bogen();
-		// String bogenId = req.getParameter("Vorname");
-		
-		
+		String bogenId = req.getParameter("Vorname");
 		DatenbankAnbindung dba = new DatenbankAnbindung();
-		dba.insertBogenIntoStamm(vorname, nachname, antwortGeschlecht, gebDat);
-		bogen.setId(dba.readBogenId());
-		String bogID = bogen.getId();
-
-		// bogen = dba.readBogen("1");
-
-		// String frage = bogen.getFrage1();
+		
+			bogen = dba.readBogen("1");
+		
+		String frage = bogen.getFrage1();
 
 		resp.setContentType("application/pdf");
 		String htmlResp = "";
-		htmlResp += "Vorname des Patienten: " + vorname;
+		htmlResp += "Frage 1 aus Bogen: " + frage;
 		htmlResp += "\nNachname des Patienten: " + nachname;
 		htmlResp += "\nGeschlecht des Patienten: " + antwortGeschlecht;
 		htmlResp += "\nGeburtsdatum des Patienten: " + gebDat;
 
 		OutputStream os = resp.getOutputStream();
-		PDF_Generierung.pdfGenerieren(htmlResp, os, bogID);
+		PDF_Generierung.pdfGenerieren(htmlResp, os);
 	}
 
 }

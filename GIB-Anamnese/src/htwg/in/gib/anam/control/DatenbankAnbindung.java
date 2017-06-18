@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import htwg.in.gib.anam.model.Bogen;
-
 public class DatenbankAnbindung {
 
 	ResultSet result = null;
@@ -27,13 +25,16 @@ public class DatenbankAnbindung {
 				e.printStackTrace();
 			}
 			con = DriverManager.getConnection(
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
 			st = con.createStatement();
 			result = st.executeQuery("SELECT * FROM " + tabelle + " ORDER BY " + spalteMitID + " DESC LIMIT 1;");
 
 			if (result.next()) {
 				id = SQLSelectID(spalteMitID, result);
 			}
+
+			con.close();
+			
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -93,12 +94,14 @@ public class DatenbankAnbindung {
 				e.printStackTrace();
 			}
 			con = DriverManager.getConnection(
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
 			st = con.createStatement();
-			result = st.executeQuery(
+			String sql = (
 					"INSERT INTO ArArzt (ArNachname, ArVorname, ArTitel, ArLogin, ArPasswort) VALUES (" + "'" + nachname
 							+ "', '" + vorname + "', '" + titel + "', '" + username + "', '" + passwort + "');");
-
+			st.execute(sql);
+			con.close();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,13 +119,16 @@ public class DatenbankAnbindung {
 				e.printStackTrace();
 			}
 			con = DriverManager.getConnection(
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
 			st = con.createStatement();
 			result = st.executeQuery("SELECT * FROM ArArzt WHERE ArLogin = '" + username + "';");
 
 			if (result.next()) {
 				passwort2 = SQLSelectPasswort(username, result);
 			}
+
+			con.close();
+			
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -167,28 +173,30 @@ public class DatenbankAnbindung {
 	// System.out.println(dba.sucheBenutzer("Dr.Huber"));
 	// }
 
-	public void insertIntoStamm(String vorname, String nachname, String antwortGeschlecht, String gebDat,
-			String strasse, String plz, String ort) {
-		try {
-
-			Class.forName("org.sqlite.JDBC");
-
-			con = DriverManager.getConnection(
-					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
-			st = con.createStatement();
-			st.executeUpdate(
-					"INSERT INTO StammBogen (StammNachname, StammVorname, StammGeschlecht, StammGeburtstag,StammStrasse,StammOrt) VALUES ('"
-							+ nachname + "', '" + vorname + "', '" + antwortGeschlecht + "', '" + gebDat + "', '"
-							+ strasse + "' , '" + ort + "');");
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public void insertIntoStamm(String vorname, String nachname, String antwortGeschlecht, String gebDat,
+//			String strasse, String plz, String ort) {
+//		try {
+//
+//			Class.forName("org.sqlite.JDBC");
+//
+//			con = DriverManager.getConnection(
+//					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+//			st = con.createStatement();
+//			st.executeUpdate(
+//					"INSERT INTO StammBogen (StammNachname, StammVorname, StammGeschlecht, StammGeburtstag,StammStrasse,StammOrt) VALUES ('"
+//							+ nachname + "', '" + vorname + "', '" + antwortGeschlecht + "', '" + gebDat + "', '"
+//							+ strasse + "' , '" + ort + "');");
+//
+//			con.close();
+//			
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 	public int readStammID() {
 		int id = 0;
@@ -205,6 +213,9 @@ public class DatenbankAnbindung {
 
 				id += SQLSelectIDFromResultSet(result);
 			}
+
+			con.close();
+			
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -234,13 +245,15 @@ public class DatenbankAnbindung {
 				e.printStackTrace();
 			}
 			con = DriverManager.getConnection(
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
 			st = con.createStatement();
-			result = st.executeQuery(
+			st.executeUpdate(
 					"INSERT INTO StammBogen (StammNachname, StammVorname, StammGeburtstag, StammGeschlecht, StammStrasse, StammPLZ, StammOrt)"
 							+ "VALUES ('" + nachname + "', '" + vorname + "', '" + geschlecht + "', '" + gebDat + "', '"
 							+ strasse + "', '" + plz + "', '" + ort + "');");
 
+			con.close();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -259,10 +272,12 @@ public class DatenbankAnbindung {
 				e.printStackTrace();
 			}
 			con = DriverManager.getConnection(
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
 			st = con.createStatement();
-			result = st.executeQuery("INSERT INTO BewegBogen (StammBewegID) VALUES ('" + stammID + "');");
+			st.executeUpdate("INSERT INTO BewegBogen (StammBewegID) VALUES ('" + stammID + "');");
 
+			con.close();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -282,11 +297,13 @@ public class DatenbankAnbindung {
 				e.printStackTrace();
 			}
 			con = DriverManager.getConnection(
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
 			st = con.createStatement();
-			result = st.executeQuery(
+			st.executeUpdate(
 					"INSERT INTO AnAntwort (AnInhalt, BewegAnID) VALUES ('" + antwort + "', '" + bewegID + "');");
-
+			
+			con.close();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -300,12 +317,12 @@ public class DatenbankAnbindung {
 		addAnaesthesieBogenBewegDatenAntworten(antwort);
 	}
 
-//	public static void main(String[] args) {
-//		DatenbankAnbindung dba = new DatenbankAnbindung();
-//		// dba.addArzt("1", "1", "1", "1", "1");
-//		// dba.addAnaesthesiebogen("vor", "gh", "ghj", "ghj", "ghj", "12345",
-//		// "dfg", "dfg");
-//		// dba.addAnaesthesieBogenBewegDaten();
-//		System.out.println(dba.sucheNachMaxIDinDB("StammID", "StammBogen"));
-//	}
+	// public static void main(String[] args) {
+	// DatenbankAnbindung dba = new DatenbankAnbindung();
+	// // dba.addArzt("1", "1", "1", "1", "1");
+	// // dba.addAnaesthesiebogen("vor", "gh", "ghj", "ghj", "ghj", "12345",
+	// // "dfg", "dfg");
+	// // dba.addAnaesthesieBogenBewegDaten();
+	// System.out.println(dba.sucheNachMaxIDinDB("StammID", "StammBogen"));
+	// }
 }

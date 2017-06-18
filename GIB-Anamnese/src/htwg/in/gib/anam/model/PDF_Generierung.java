@@ -26,6 +26,7 @@ public class PDF_Generierung {
 			String barcodeID = "" + bogen.getId();
 			barcode.setCode(barcodeID);
 			barcode.setCodeType(Barcode.UPCA);
+			barcode.getCode();
 
 			document.add(new Paragraph("Anamnesebogen"));
 			document.add(barcode.createImageWithBarcode(content, Color.BLACK, Color.BLACK));

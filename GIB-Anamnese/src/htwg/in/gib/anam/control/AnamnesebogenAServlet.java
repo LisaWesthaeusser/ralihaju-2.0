@@ -81,7 +81,7 @@ public class AnamnesebogenAServlet extends AbstractServlet {
 		Bogen bogen = new Bogen();
 		// String bogenId = req.getParameter("Vorname");
 		DatenbankAnbindung dba = new DatenbankAnbindung();
-		dba.addAnaesthesieBogenStammDaten(vorname, nachname, geschlecht, gebDat, strasse, plz, antwort023);
+//		dba.addAnaesthesieBogenStammDaten(vorname, nachname, geschlecht, gebDat, strasse, plz, antwort023);
 		dba.addAnaesthesiebogen(vorname, nachname, geschlecht, gebDat, strasse, plz, ort, antwort002);
 		bogen.setId(dba.sucheNachMaxIDinDB("StammID", "StammBogen"));
 
@@ -100,9 +100,9 @@ public class AnamnesebogenAServlet extends AbstractServlet {
 		OutputStream os = resp.getOutputStream();
 		PDF_Generierung.pdfGenerieren(htmlResp, os, bogen);
 	}
-public static void main(String[] args) {
-	
-	DatenbankAnbindung dba = new DatenbankAnbindung();
-	dba.addAnaesthesiebogen("123", "123", "12", "123", "123", "12", "123", "1234");
-}
+//public static void main(String[] args) {
+//	
+//	DatenbankAnbindung dba = new DatenbankAnbindung();
+//	dba.addAnaesthesiebogen("123", "123", "12", "123", "123", "12", "123", "1234");
+//}
 }

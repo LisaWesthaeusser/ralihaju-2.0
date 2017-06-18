@@ -5,6 +5,38 @@
 <title>Online Anamnese</title>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="../css/Style.css">
+<script>
+var elem = document.getElementById('senden');
+elem.addEventListener('click', absenden);
+
+function Senden() {
+	if (document.absenden.Vorname.value == "") {
+		alert("Bitte Ihren Vornamen eingeben!");
+		document.absenden.Vorname.focus();
+		return false;
+	}
+	if (document.absenden.Nachname.value == "") {
+		alert("Bitte Ihren Nachamen eingeben!");
+		document.absenden.Nachname.focus();
+		return false;
+	}
+	if (document.absenden.Account.value == "") {
+		alert("Bitte geben Sie Ihren Account-Namen ein!");
+		document.absenden.Account.focus();
+		return false;
+	}
+	
+	
+    if(document.absenden.Passwort1.value != document.absenden.Passwort2.value) {
+      alert("Bitte überprüfen Sie ihre Passwortangaben!");
+      document.absenden.Account.focus();
+      return false;
+    }
+   
+  }
+	
+
+</script>
 <body>
 	<div class="container">
 
@@ -36,11 +68,11 @@
 				<br>
 					Vorname<span
 						style="display: inline-block; width: 100px; color: red;">*</span><input
-						type="text" id="Textfeld" name="Vorname">
+						type="text" id="Textfeld" name="Vorname" required>
 					<p>
 						Nachname<span
 							style="display: inline-block; width: 82px; color: red;">*</span><input
-							type="text" id="Textfeld" name="Nachname">
+							type="text" id="Textfeld" name="Nachname" required>
 					</p>
 					<p>
 						Titel<span style="display: inline-block; width: 147px; color: red;"></span><input
@@ -76,20 +108,20 @@
 					<p>
 						Account-Name<span
 							style="display: inline-block; width: 42px; color: red;">*</span><input
-							type="text" id="Textfeld" name="Account-Name">
+							type="text" id="Textfeld" name="Account" required>
 					</p>
 					<p>
 						Passwort<span
 							style="display: inline-block; width: 99px; color: red;">*</span><input
-							type="text" id="Textfeld" name="Passwort">
+							type="text" id="pw1" name="Passwort1" required>
 					</p>
 					<p>
 						Bestätigen Sie <br>Ihr Passwort<span
 							style="display: inline-block; width: 65px; color: red;">*</span><input
-							type="text" id="Textfeld" name="Passwort">
-					</p></div>
+							type="text" id="pw2" name="Passwort2" required>
+					</p><br></div>
 					<div class="antwort"></div>	
-					<br>  <input id="senden" type="submit" value="Absenden" onclick="Senden();">
+					<br><input id="senden" type="submit" value="Absenden" onclick="Senden();">
 						  
 				
 			</form>

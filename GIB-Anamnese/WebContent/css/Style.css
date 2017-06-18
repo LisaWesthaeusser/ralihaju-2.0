@@ -277,6 +277,11 @@ table {
 	height: 20px;
 	font-size: 15px;
 }
+#pw1, #pw2{
+		width: 310px;
+	height: 20px;
+	font-size: 15px;
+}
 
 textarea {
 	font-size: 15px;

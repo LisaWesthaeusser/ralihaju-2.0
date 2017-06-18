@@ -23,7 +23,7 @@ public class AnamnesebogenAServlet extends AbstractServlet {
 
 		String vorname = req.getParameter("Vorname");
 		String nachname = req.getParameter("Nachname");
-		String antwortGeschlecht = req.getParameter("Geschlecht");
+		String geschlecht = req.getParameter("Geschlecht");
 		String gebDat = req.getParameter("gebDat");
 		String strasse = req.getParameter("Str");
 		String plz = req.getParameter("PLZ");
@@ -81,7 +81,7 @@ public class AnamnesebogenAServlet extends AbstractServlet {
 		Bogen bogen = new Bogen();
 		// String bogenId = req.getParameter("Vorname");
 		DatenbankAnbindung dba = new DatenbankAnbindung();
-		dba.insertIntoStamm(vorname, nachname, antwortGeschlecht, gebDat, strasse, plz, ort);
+		dba.addAnaesthesiebogen(vorname, nachname, geschlecht, gebDat, strasse, plz, ort, antwort002);
 		bogen.setId(dba.readStammID());
 
 		// bogen = dba.readBogen("1");
@@ -90,13 +90,11 @@ public class AnamnesebogenAServlet extends AbstractServlet {
 
 		resp.setContentType("application/pdf");
 		String htmlResp = "";
-		htmlResp += "Vorname des Patienten " + vorname;
-		htmlResp += "\nNachname des Patienten: " + nachname;
-		htmlResp += "\nGeschlecht des Patienten: " + antwortGeschlecht;
-		htmlResp += "\nGeburtsdatum des Patienten: " + gebDat;
-		htmlResp += "\nGeburtsdatum des Patienten: " + strasse;
-		htmlResp += "\nGeburtsdatum des Patienten: " + plz;
-		htmlResp += "\nGeburtsdatum des Patienten: " + ort;
+		htmlResp += "Vorname: " + vorname;
+		htmlResp += "\nNachname: " + nachname;
+		htmlResp += "\nGeschlecht: " + geschlecht;
+		htmlResp += "\nGeburtsdatum: " + gebDat;
+		htmlResp += "\nFrage 01: " + antwort002;
 
 		OutputStream os = resp.getOutputStream();
 		PDF_Generierung.pdfGenerieren(htmlResp, os, bogen);

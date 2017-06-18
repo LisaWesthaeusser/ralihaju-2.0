@@ -14,10 +14,10 @@ public class DatenbankAnbindung {
 	Statement st = null;
 	Connection con = null;
 	String kette = null;
-	
-	public int sucheNachMaxIDinDB(String spalteMitID, String tabelle) {
 
-		int id = 0;
+	public String sucheNachMaxIDinDB(String spalteMitID, String tabelle) {
+
+		String id = "";
 
 		try {
 			try {
@@ -29,7 +29,7 @@ public class DatenbankAnbindung {
 			con = DriverManager.getConnection(
 					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
 			st = con.createStatement();
-			result = st.executeQuery("SELECT MAX(" + spalteMitID + ")FROM '" + tabelle + "';");
+			result = st.executeQuery("SELECT * FROM " + tabelle + " ORDER BY " + spalteMitID + " DESC LIMIT 1;");
 
 			if (result.next()) {
 				id = SQLSelectID(spalteMitID, result);
@@ -42,9 +42,9 @@ public class DatenbankAnbindung {
 		return id;
 	}
 
-	private int SQLSelectID(String spalteMitID, ResultSet result) throws SQLException {
-		int id = 0;
-		id = result.getInt(spalteMitID);
+	private String SQLSelectID(String spalteMitID, ResultSet result) throws SQLException {
+		String id = "";
+		id = result.getString(spalteMitID);
 
 		return id;
 	}
@@ -75,13 +75,14 @@ public class DatenbankAnbindung {
 	// return bogen;
 	// }
 
-//	private Bogen SQLSelectBogen(String id, ResultSet result) throws SQLException {
-//
-//		Bogen bog = new Bogen();
-//		bog.setFrage1(result.getString("BoFrage1"));
-//		bog.setId(result.getString("BoID"));
-//		return bog;
-//	}
+	// private Bogen SQLSelectBogen(String id, ResultSet result) throws
+	// SQLException {
+	//
+	// Bogen bog = new Bogen();
+	// bog.setFrage1(result.getString("BoFrage1"));
+	// bog.setId(result.getString("BoID"));
+	// return bog;
+	// }
 
 	public void addArzt(String vorname, String nachname, String titel, String username, String passwort) {
 		try {
@@ -192,36 +193,36 @@ public class DatenbankAnbindung {
 	public int readStammID() {
 		int id = 0;
 		try {
-			
-				Class.forName("org.sqlite.JDBC");
-			 
+
+			Class.forName("org.sqlite.JDBC");
+
 			con = DriverManager.getConnection(
 					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
 			st = con.createStatement();
 			result = st.executeQuery("SELECT MAX (StammID) FROM StammBogen;");
 
 			if (result.next()) {
-				
+
 				id += SQLSelectIDFromResultSet(result);
 			}
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return id;
 	}
 
 	private int SQLSelectIDFromResultSet(ResultSet result2) throws SQLException {
-		
+
 		int id = result2.getInt("StammID");
 		return id;
 	}
-	
+
 	public void addAnaesthesieBogenStammDaten(String vorname, String nachname, String geschlecht, String gebDat,
 			String strasse, String plz, String ort) {
 		try {
@@ -247,7 +248,7 @@ public class DatenbankAnbindung {
 	}
 
 	public void addAnaesthesieBogenBewegDaten() {
-		Integer stammID = sucheNachMaxIDinDB("StammID", "StammBogen");
+		String stammID = sucheNachMaxIDinDB("StammID", "StammBogen");
 
 		try {
 
@@ -260,7 +261,7 @@ public class DatenbankAnbindung {
 			con = DriverManager.getConnection(
 					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
 			st = con.createStatement();
-			result = st.executeQuery("INSERT INTO AnAntwort (StammAnID)" + "VALUES ('" + stammID + "');");
+			result = st.executeQuery("INSERT INTO BewegBogen (StammBewegID) VALUES ('" + stammID + "');");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -270,7 +271,7 @@ public class DatenbankAnbindung {
 
 	public void addAnaesthesieBogenBewegDatenAntworten(String antwort) {
 
-		Integer bewegID = sucheNachMaxIDinDB("BewegBoID", "BewegBogen");
+		String bewegID = sucheNachMaxIDinDB("BewegBoID", "BewegBogen");
 
 		try {
 
@@ -284,7 +285,7 @@ public class DatenbankAnbindung {
 					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
 			st = con.createStatement();
 			result = st.executeQuery(
-					"INSERT INTO AnAntwort (AnInhalt, BewegAnID)" + "VALUES ('" + antwort + "', '" + bewegID + "');");
+					"INSERT INTO AnAntwort (AnInhalt, BewegAnID) VALUES ('" + antwort + "', '" + bewegID + "');");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -298,10 +299,13 @@ public class DatenbankAnbindung {
 		addAnaesthesieBogenBewegDaten();
 		addAnaesthesieBogenBewegDatenAntworten(antwort);
 	}
-	
-	public static void main(String[] args) {
-		DatenbankAnbindung dba = new DatenbankAnbindung();
-		dba.addArzt("gh", "hj", "hj", "io", "hjk");		
-		dba.addAnaesthesiebogen("vor", "gh", "ghj", "ghj", "ghj", "12345", "dfg", "dfg");
-	}
+
+//	public static void main(String[] args) {
+//		DatenbankAnbindung dba = new DatenbankAnbindung();
+//		// dba.addArzt("1", "1", "1", "1", "1");
+//		// dba.addAnaesthesiebogen("vor", "gh", "ghj", "ghj", "ghj", "12345",
+//		// "dfg", "dfg");
+//		// dba.addAnaesthesieBogenBewegDaten();
+//		System.out.println(dba.sucheNachMaxIDinDB("StammID", "StammBogen"));
+//	}
 }

@@ -92,7 +92,7 @@ public class DatenbankAnbindung {
 				e.printStackTrace();
 			}
 			con = DriverManager.getConnection(
-					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
 			st = con.createStatement();
 			result = st.executeQuery(
 					"INSERT INTO ArArzt (ArNachname, ArVorname, ArTitel, ArLogin, ArPasswort) VALUES (" + "'" + nachname
@@ -115,7 +115,7 @@ public class DatenbankAnbindung {
 				e.printStackTrace();
 			}
 			con = DriverManager.getConnection(
-					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
 			st = con.createStatement();
 			result = st.executeQuery("SELECT * FROM ArArzt WHERE ArLogin = '" + username + "';");
 
@@ -300,9 +300,8 @@ public class DatenbankAnbindung {
 	}
 	
 	public static void main(String[] args) {
-		DatenbankAnbindung db = new DatenbankAnbindung();
-//				int id = db.readStammID();
-		String n = db.sucheBenutzer("MeierGP");
-				System.out.println(n);
+		DatenbankAnbindung dba = new DatenbankAnbindung();
+		dba.addArzt("gh", "hj", "hj", "io", "hjk");		
+		dba.addAnaesthesiebogen("vor", "gh", "ghj", "ghj", "ghj", "12345", "dfg", "dfg");
 	}
 }

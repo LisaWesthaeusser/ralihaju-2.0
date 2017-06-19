@@ -14,6 +14,35 @@ public class DatenbankAnbindungLisa {
 	Statement st = null;
 	Connection con = null;
 	String kette = null;
+	
+	public List<String> selectBoegen() {
+		List<String> accounts = new ArrayList<String>();
+		try {
+			try {
+				Class.forName("org.sqlite.JDBC");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			con = DriverManager.getConnection(
+					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+			st = con.createStatement();
+			result = st.executeQuery("SELECT * FROM BewegBogen INNER JOIN ArArzt ON BewegBogen.ArBewegID = ArArzt.ArID");
+
+			while (result.next()) {
+				String account = new String();
+				account = result.getString("ArLogin");
+				accounts.add(account);
+			}
+			con.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return accounts;
+	}
 
 	public String sucheNachMaxIDinDB(String spalteMitID, String tabelle) {
 

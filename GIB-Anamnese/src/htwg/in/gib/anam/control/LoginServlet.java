@@ -3,6 +3,7 @@ package htwg.in.gib.anam.control;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,27 +31,13 @@ public class LoginServlet extends AbstractServlet {
 		if(passwort.equals(passwortVergleich)){
 					
 		response.setContentType("text/html");
-		PrintWriter writer = response.getWriter();
-		String htmlResponse = "<html>";
-		htmlResponse += "<head>";
-		htmlResponse += "<body>";
-	    htmlResponse +=  "<h2>Ihr Benutzername lautet: " + username + "</h2>";
-		htmlResponse += "<h2>Ihr Passwort lautet: " + passwort + "</h2>";
-	    htmlResponse +=  "<h2>Ihr Benutzername lautet: " + username + "</h2>";
-		htmlResponse += "</body>";
-		htmlResponse += "</html>";		
-		writer.println(htmlResponse);
+		RequestDispatcher view = request.getRequestDispatcher("html/Arzt.jsp");
+		view.forward(request, response);
 	
 	} else {
 		response.setContentType("text/html");
-		PrintWriter writer = response.getWriter();
-		String htmlResponse = "<html>";
-		htmlResponse += "<head>";
-		htmlResponse += "<body>";
-	    htmlResponse +=  "<h2> Falsches Passwort! </h2>";
-		htmlResponse += "</body>";
-		htmlResponse += "</html>";		
-		writer.println(htmlResponse);
+		RequestDispatcher view = request.getRequestDispatcher("html/Login.jsp");
+		view.forward(request, response);
 	}
 	}
 }

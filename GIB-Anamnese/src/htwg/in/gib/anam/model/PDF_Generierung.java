@@ -29,12 +29,13 @@ public class PDF_Generierung {
 			PdfContentByte content = writer.getDirectContent();
 			BarcodeEAN barcode = new BarcodeEAN();
 			String barcodeID = "" + bogen.getId();
+			String newBarcodeID = barcodeID.substring(1);
 //			barcode.setCode(barcodeID);
 			barcode.setCodeType(Barcode.EAN13);
 			
-			BarCodeBuilder builder = new BarCodeBuilder(Symbology.Code39Standard + barcodeID);
-			barcode.setCode(Symbology.Code39Standard + barcodeID);
-			builder.save("C:/Users/Jülide/Desktop/test.jpg");
+//			BarCodeBuilder builder = new BarCodeBuilder(Symbology.Code39Standard + barcodeID);
+			barcode.setCode(Symbology.Code39Standard + newBarcodeID);
+//			builder.save("C:/Users/Jülide/Desktop/test.jpg");
 //			BarCodeReader reader = new BarCodeReader("C:/Users/Jülide/Desktop/test.jpg", BarCodeReadType.Code39Standard);
 //			while(reader.read()){
 //				reader.getCodeText();

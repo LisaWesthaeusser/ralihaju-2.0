@@ -118,7 +118,8 @@ public class AnamnesebogenAServlet extends AbstractServlet {
 		Bogen bogen = new Bogen();
 		DatenbankAnbindung dba = new DatenbankAnbindung();
 		arzt = nurArztID(arzt);
-		dba.addAnaesthesiebogen(vorname, nachname, geschlecht, gebDat, strasse, plz, ort, antwort002, arzt);
+		
+		dba.addAnaesthesiebogen(vorname, arzt, "1");
 		bogen.setId(dba.sucheNachMaxIDinDB("StammID", "StammBogen"));
 
 		resp.setContentType("application/pdf");

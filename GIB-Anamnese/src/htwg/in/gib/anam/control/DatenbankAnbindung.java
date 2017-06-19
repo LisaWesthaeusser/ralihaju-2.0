@@ -14,7 +14,7 @@ public class DatenbankAnbindung {
 	Statement st = null;
 	Connection con = null;
 	String kette = null;
-	
+
 	String pfad = "jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db";
 
 	public String sucheNachMaxIDinDB(String spalteMitID, String tabelle) {
@@ -52,42 +52,8 @@ public class DatenbankAnbindung {
 		return id;
 	}
 
-	// public Bogen readBogen(String id) {
-	// Bogen bogen = new Bogen();
-	// bogen.setId(id);
-	//
-	// try {
-	// try {
-	// Class.forName("org.sqlite.JDBC");
-	// } catch (ClassNotFoundException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// con = DriverManager.getConnection(
-	// "jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
-	// st = con.createStatement();
-	// result = st.executeQuery("SELECT * FROM BoBogen WHERE BoID = " + id);
-	//
-	// if (result.next()) {
-	// bogen = SQLSelectBogen(id, result);
-	// }
-	// } catch (SQLException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// return bogen;
-	// }
-
-	// private Bogen SQLSelectBogen(String id, ResultSet result) throws
-	// SQLException {
-	//
-	// Bogen bog = new Bogen();
-	// bog.setFrage1(result.getString("BoFrage1"));
-	// bog.setId(result.getString("BoID"));
-	// return bog;
-	// }
-
-	public void addArzt(String vorname, String nachname, String titel, String institution, String strasse, String hausnummer, String plz, String ort, String email, String username, String passwort) {
+	public void addArzt(String vorname, String nachname, String titel, String institution, String strasse,
+			String hausnummer, String plz, String ort, String email, String username, String passwort) {
 		try {
 			try {
 				Class.forName("org.sqlite.JDBC");
@@ -97,10 +63,10 @@ public class DatenbankAnbindung {
 			}
 			con = DriverManager.getConnection(pfad);
 			st = con.createStatement();
-			String sql = ("INSERT INTO ArArzt (ArNachname, ArVorname, ArTitel, ArInstitution, ArStrasse, ArHausnummer, ArPLZ, ArOrt, ArEmailAdresse, ArLogin, ArPasswort) VALUES (" + "'"
-					+ nachname + "', '" + vorname + "', '" + titel + "', '" 
-					+ institution + "', '"  + strasse + "', '" + hausnummer + "', '" 
-					+ plz + "', '" + ort + "', '" + email + "', '" + username + "', '" + passwort + "');");
+			String sql = ("INSERT INTO ArArzt (ArNachname, ArVorname, ArTitel, ArInstitution, ArStrasse, ArHausnummer, ArPLZ, ArOrt, ArEmailAdresse, ArLogin, ArPasswort) VALUES ("
+					+ "'" + nachname + "', '" + vorname + "', '" + titel + "', '" + institution + "', '" + strasse
+					+ "', '" + hausnummer + "', '" + plz + "', '" + ort + "', '" + email + "', '" + username + "', '"
+					+ passwort + "');");
 			st.execute(sql);
 			con.close();
 
@@ -144,99 +110,7 @@ public class DatenbankAnbindung {
 		return passwort2;
 	}
 
-	// public Bogen[] sucheBogenFuerArzt(int ArID) {
-	// try {
-	// try {
-	// Class.forName("org.sqlite.JDBC");
-	// } catch (ClassNotFoundException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// con = DriverManager.getConnection(
-	// "jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
-	// st = con.createStatement();
-	// result = st.executeQuery(
-	// "INSERT INTO ArArzt (ArNachname, ArVorname, ArTitel, ArLogin, ArPasswort)
-	// VALUES (" + "'" + nachname
-	// + "', '" + vorname + "', '" + titel + "', '" + username + "', '" +
-	// passwort + "');");
-	//
-	// } catch (SQLException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	//
-	// }
-
-	// public static void main(String[] args) {
-	// DatenbankAnbindung dba = new DatenbankAnbindung();
-	// System.out.println(dba.sucheBenutzer("Dr.Huber"));
-	// }
-
-	// public void insertIntoStamm(String vorname, String nachname, String
-	// antwortGeschlecht, String gebDat,
-	// String strasse, String plz, String ort) {
-	// try {
-	//
-	// Class.forName("org.sqlite.JDBC");
-	//
-	// con = DriverManager.getConnection(
-	// "jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
-	// st = con.createStatement();
-	// st.executeUpdate(
-	// "INSERT INTO StammBogen (StammNachname, StammVorname, StammGeschlecht,
-	// StammGeburtstag,StammStrasse,StammOrt) VALUES ('"
-	// + nachname + "', '" + vorname + "', '" + antwortGeschlecht + "', '" +
-	// gebDat + "', '"
-	// + strasse + "' , '" + ort + "');");
-	//
-	// con.close();
-	//
-	// } catch (SQLException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// } catch (ClassNotFoundException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// }
-
-	public int readStammID() {
-		int id = 0;
-		try {
-
-			Class.forName("org.sqlite.JDBC");
-
-			con = DriverManager.getConnection(pfad);
-			st = con.createStatement();
-			result = st.executeQuery("SELECT MAX (StammID) FROM StammBogen;");
-
-			if (result.next()) {
-
-				id += SQLSelectIDFromResultSet(result);
-			}
-
-			con.close();
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return id;
-	}
-
-	private int SQLSelectIDFromResultSet(ResultSet result2) throws SQLException {
-
-		int id = result2.getInt("StammID");
-		return id;
-	}
-
-	public void addAnaesthesieBogenStammDaten(String vorname, String nachname, String geschlecht, String gebDat,
-			String strasse, String plz, String ort) {
+	public void addAnaesthesieBogenBewegBogen(String arztID) {
 		try {
 
 			try {
@@ -248,32 +122,8 @@ public class DatenbankAnbindung {
 			con = DriverManager.getConnection(pfad);
 			st = con.createStatement();
 			st.executeUpdate(
-					"INSERT INTO StammBogen (StammNachname, StammVorname, StammGeburtstag, StammGeschlecht, StammStrasse, StammPLZ, StammOrt)"
-							+ "VALUES ('" + nachname + "', '" + vorname + "', '" + geschlecht + "', '" + gebDat + "', '"
-							+ strasse + "', '" + plz + "', '" + ort + "');");
-
-			con.close();
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public void addAnaesthesieBogenBewegDaten(String arzt) {
-		String stammID = sucheNachMaxIDinDB("StammID", "StammBogen");
-
-		try {
-
-			try {
-				Class.forName("org.sqlite.JDBC");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			con = DriverManager.getConnection(pfad);
-			st = con.createStatement();
-			st.executeUpdate("INSERT INTO BewegBogen (StammBewegID, ArBewegID) VALUES ('" + stammID + "', '" + arzt + "');");
+					"INSERT INTO BewegBogen (StammBewegID, ArBewegID)"
+							+ "VALUES ('1', '" + arztID + "');");
 
 			con.close();
 
@@ -298,7 +148,7 @@ public class DatenbankAnbindung {
 			con = DriverManager.getConnection(pfad);
 			st = con.createStatement();
 			st.executeUpdate(
-					"INSERT INTO AnAntwort (AnInhalt, BewegAnID) VALUES ('" + antwort + "', '" + bewegID + "');");
+					"INSERT INTO AnAntwort (AnInhalt, BewegAnID) VALUES ('" + antwort + "', '"+ frageID + "', '" + bewegID + "');");
 
 			con.close();
 
@@ -326,7 +176,8 @@ public class DatenbankAnbindung {
 			while (result.next()) {
 				String arzt = new String();
 				arzt = result.getString("ArTitel") + " " + result.getString("ArNachname") + ", "
-						+ result.getString("ArStrasse") +  result.getString("ArHausnummer") + ", " + result.getString("ArOrt") + ".      (" + result.getString("ArID") + ")";
+						+ result.getString("ArStrasse") + result.getString("ArHausnummer") + ", "
+						+ result.getString("ArOrt") + ".      (" + result.getString("ArID") + ")";
 				aerzte.add(arzt);
 			}
 
@@ -368,10 +219,8 @@ public class DatenbankAnbindung {
 		return accounts;
 	}
 
-	public void addAnaesthesiebogen(String vorname, String nachname, String geschlecht, String gebDat, String strasse,
-			String plz, String ort, String antwort, String arzt) {
-		addAnaesthesieBogenStammDaten(vorname, nachname, geschlecht, gebDat, strasse, plz, ort);
-		addAnaesthesieBogenBewegDaten(arzt);
-		addAnaesthesieBogenBewegDatenAntworten(antwort);
+	public void addAnaesthesiebogen(String antwort, String arzt, String frageID) {
+		addAnaesthesieBogenBewegBogen(arzt);
+		addAnaesthesieBogenBewegDatenAntworten(antwort, frageID);
 	}
 }

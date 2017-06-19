@@ -148,7 +148,7 @@ public class DatenbankAnbindung {
 			con = DriverManager.getConnection(pfad);
 			st = con.createStatement();
 			st.executeUpdate(
-					"INSERT INTO AnAntwort (AnInhalt, BewegAnID) VALUES ('" + antwort + "', '"+ frageID + "', '" + bewegID + "');");
+					"INSERT INTO AnAntwort (AnInhalt, FrAnID, BewegAnID) VALUES ('" + antwort + "', '"+ frageID + "', '" + bewegID + "');");
 
 			con.close();
 
@@ -202,7 +202,7 @@ public class DatenbankAnbindung {
 			}
 			con = DriverManager.getConnection(pfad);
 			st = con.createStatement();
-			result = st.executeQuery("SELECT ArAccount;");
+			result = st.executeQuery("SELECT ArAccount FROM ArArzt;");
 
 			while (result.next()) {
 				String account = new String();
@@ -217,6 +217,34 @@ public class DatenbankAnbindung {
 		}
 
 		return accounts;
+	}
+	
+	public List<String> selectFragen() {
+		List<String> fragen = new ArrayList<String>();
+		try {
+			try {
+				Class.forName("org.sqlite.JDBC");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			con = DriverManager.getConnection(pfad);
+			st = con.createStatement();
+			result = st.executeQuery("SELECT FrName FROM FrFrage;");
+
+			while (result.next()) {
+				String frage = new String();
+				frage = result.getString("FrFrage");
+				fragen.add(frage);
+			}
+			con.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return fragen;
 	}
 
 	public void addAnaesthesiebogen(String antwort, String arzt, String frageID) {

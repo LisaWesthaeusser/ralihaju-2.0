@@ -74,7 +74,7 @@ public class AnamnesebogenAServlet extends AbstractServlet {
 			dba.addAnaesthesieBogenBewegDatenAntworten(antworten.get(i), "" + i);
 		}
 
-		 bogen.setId(dba.sucheNachMaxIDinDB("BewegID", "BewegBogen"));
+		 bogen.setId(dba.sucheNachMaxIDinDB("BewegBoID", "BewegBogen"));
 
 		resp.setContentType("application/pdf");
 //

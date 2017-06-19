@@ -525,14 +525,14 @@
 				<br>
 				
 				<div class="frage">Welchem Arzt möchten Sie Ihren Anamnesebogen senden?</div>
-								<div class="antwort">
+								<div class="antwort"> 
 					<select name="anWelchenArzt" required>
 				<% 	DatenbankAnbindung dba = new DatenbankAnbindung();
 					List<String> list = dba.selectAerzte();
 					for(int i = 0; i < list.size(); i++){
 						String arzt = list.get(i);
 					%>
-						<option value="arzt<%=i%>"><%=arzt%></option>
+						<option value="<%=arzt%>"><%=arzt%></option>
 					<% } %>
 					</select>
 				</div>

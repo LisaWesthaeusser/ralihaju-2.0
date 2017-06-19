@@ -43,7 +43,7 @@
 			<div class="antwort">
 				<%
 					DatenbankAnbindung dba = new DatenbankAnbindung();
-					List<String> list = dba.selectAerzte();
+					List<String> list = dba.selectBoegenEinesAccounts(arztID);
 					for (int i = 0; i < list.size(); i++) {
 						String bogen = list.get(i);
 				%>

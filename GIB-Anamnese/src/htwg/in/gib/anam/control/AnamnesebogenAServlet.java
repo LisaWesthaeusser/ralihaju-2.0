@@ -77,8 +77,8 @@ public class AnamnesebogenAServlet extends AbstractServlet {
 		 bogen.setId(dba.sucheNachMaxIDinDB("BewegID", "BewegBogen"));
 
 		resp.setContentType("application/pdf");
-
-		PrintWriter w = resp.getWriter();
+//
+//		PrintWriter w = resp.getWriter();
 		String htmlResp = "";
 
 		List<String> fragen = dba.selectFragen();

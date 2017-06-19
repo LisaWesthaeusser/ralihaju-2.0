@@ -110,9 +110,8 @@ public class DatenbankAnbindung {
 		return passwort2;
 	}
 
-	public void addAnaesthesieBogenBewegBogen(String arztID) {
+	public void addAnaesthesieBogenBewegBogen(int arztID) {
 		try {
-
 			try {
 				Class.forName("org.sqlite.JDBC");
 			} catch (ClassNotFoundException e) {
@@ -121,9 +120,7 @@ public class DatenbankAnbindung {
 			}
 			con = DriverManager.getConnection(pfad);
 			st = con.createStatement();
-			st.executeUpdate(
-					"INSERT INTO BewegBogen (StammBewegID, ArBewegID)"
-							+ "VALUES ('1', '" + arztID + "');");
+			st.executeUpdate("INSERT INTO BewegBogen (StammBewegID, ArBewegID)" + "VALUES ('1', '" + arztID + "');");
 
 			con.close();
 
@@ -147,8 +144,8 @@ public class DatenbankAnbindung {
 			}
 			con = DriverManager.getConnection(pfad);
 			st = con.createStatement();
-			st.executeUpdate(
-					"INSERT INTO AnAntwort (AnInhalt, FrAnID, BewegAnID) VALUES ('" + antwort + "', '"+ frageID + "', '" + bewegID + "');");
+			st.executeUpdate("INSERT INTO AnAntwort (AnInhalt, FrAnID, BewegAnID) VALUES ('" + antwort + "', '"
+					+ frageID + "', '" + bewegID + "');");
 
 			con.close();
 
@@ -218,7 +215,7 @@ public class DatenbankAnbindung {
 
 		return accounts;
 	}
-	
+
 	public List<String> selectFragen() {
 		List<String> fragen = new ArrayList<String>();
 		try {
@@ -234,7 +231,7 @@ public class DatenbankAnbindung {
 
 			while (result.next()) {
 				String frage = new String();
-				frage = result.getString("FrFrage");
+				frage = result.getString("FrName");
 				fragen.add(frage);
 			}
 			con.close();
@@ -247,8 +244,33 @@ public class DatenbankAnbindung {
 		return fragen;
 	}
 
-	public void addAnaesthesiebogen(String antwort, String arzt, String frageID) {
-		addAnaesthesieBogenBewegBogen(arzt);
-		addAnaesthesieBogenBewegDatenAntworten(antwort, frageID);
+	public List<String> selectBoegenEinesAccounts(String arztID) {
+		List<String> fragen = new ArrayList<String>();
+		try {
+			try {
+				Class.forName("org.sqlite.JDBC");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			con = DriverManager.getConnection(pfad);
+			st = con.createStatement();
+			result = st.executeQuery("SELECT FrAnID, AnInhalt FROM BewegBogen INNER JOIN ArArzt "
+					+ "ON BewegBogen.ArBewegID = ArArzt.ArID INNER JOIN AnAntwort "
+					+ "ON BewegBogen.BewegBoID = AnAntwort.BewegAnID" + "WHERE ArID = " + arztID + ";");
+
+			while (result.next()) {
+				String frage = new String();
+				frage = result.getString("AnInhalt");
+				fragen.add(frage);
+			}
+			con.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return fragen;
 	}
 }

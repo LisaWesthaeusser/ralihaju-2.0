@@ -120,7 +120,7 @@ public class AnamnesebogenAServlet extends AbstractServlet {
 		arzt = nurArztID(arzt);
 		
 		dba.addAnaesthesiebogen(vorname, arzt, "1");
-		bogen.setId(dba.sucheNachMaxIDinDB("StammID", "StammBogen"));
+		bogen.setId(dba.sucheNachMaxIDinDB("BewegBoID", "BewegBogen"));
 
 		resp.setContentType("application/pdf");
 		String htmlResp = "";

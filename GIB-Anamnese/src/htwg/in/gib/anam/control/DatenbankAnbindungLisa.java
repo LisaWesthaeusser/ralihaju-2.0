@@ -25,7 +25,7 @@ public class DatenbankAnbindungLisa {
 				e.printStackTrace();
 			}
 			con = DriverManager.getConnection(
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
 			st = con.createStatement();
 			result = st.executeQuery("SELECT * FROM BewegBogen INNER JOIN ArArzt ON BewegBogen.ArBewegID = ArArzt.ArID");
 

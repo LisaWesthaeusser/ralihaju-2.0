@@ -3,6 +3,10 @@ package htwg.in.gib.anam.model;
 import java.awt.Color;
 import java.io.OutputStream;
 
+import com.aspose.barcode.BarCodeBuilder;
+import com.aspose.barcode.Symbology;
+import com.aspose.barcode.barcoderecognition.BarCodeReadType;
+import com.aspose.barcode.barcoderecognition.BarCodeReader;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Paragraph;
@@ -26,7 +30,14 @@ public class PDF_Generierung {
 			String barcodeID = "" + bogen.getId();
 			barcode.setCode(barcodeID);
 			barcode.setCodeType(Barcode.UPCA);
-			barcode.getCode();
+//			BarCodeBuilder builder = new BarCodeBuilder(Symbology.Code39Standard + barcodeID);
+//			builder.save("C:/Users/Jülide/Desktop/test.jpg");
+//			BarCodeReader reader = new BarCodeReader("C:/Users/Jülide/Desktop/test.jpg", BarCodeReadType.Code39Standard);
+//			while(reader.read()){
+//				reader.getCodeText();
+//			}
+//			reader.close();
+//			System.out.println(reader);
 
 			document.add(new Paragraph("Anamnesebogen"));
 			document.add(barcode.createImageWithBarcode(content, Color.BLACK, Color.BLACK));

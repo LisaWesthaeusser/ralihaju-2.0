@@ -15,7 +15,7 @@ public class DatenbankAnbindung {
 	Connection con = null;
 	String kette = null;
 
-	String pfad = "jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db";
+	String pfad = "jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db";
 
 	public String sucheNachMaxIDinDB(String spalteMitID, String tabelle) {
 

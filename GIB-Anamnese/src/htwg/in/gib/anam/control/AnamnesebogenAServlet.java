@@ -94,10 +94,11 @@ public class AnamnesebogenAServlet extends AbstractServlet {
 		String nachricht001 = req.getParameter("Nachricht01");
 		String nachricht002 = req.getParameter("Nachricht02");
 		String nachricht003 = req.getParameter("Nachricht03");
+		String azrt = req.getParameter("anWelchenArzt");
 
 		Bogen bogen = new Bogen();
 		DatenbankAnbindung dba = new DatenbankAnbindung();
-		dba.addAnaesthesiebogen(vorname, nachname, geschlecht, gebDat, strasse, plz, ort, antwort002);
+		dba.addAnaesthesiebogen(vorname, nachname, geschlecht, gebDat, strasse, plz, ort, antwort002, arzt);
 		bogen.setId(dba.sucheNachMaxIDinDB("StammID", "StammBogen"));
 
 		resp.setContentType("application/pdf");

@@ -29,7 +29,7 @@ public class DatenbankAnbindung {
 			con = DriverManager.getConnection(
 
 					// "jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/DatenbankJuelide.db");
 			st = con.createStatement();
 			result = st.executeQuery("SELECT * FROM " + tabelle + " ORDER BY " + spalteMitID + " DESC LIMIT 1;");
 
@@ -98,7 +98,7 @@ public class DatenbankAnbindung {
 			}
 			con = DriverManager.getConnection(
 					// "jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/DatenbankJuelide.db");
 			st = con.createStatement();
 			String sql = ("INSERT INTO ArArzt (ArNachname, ArVorname, ArTitel, ArInstitution, ArStrasse, ArHausnummer, ArPLZ, ArOrt, ArEmailAdresse, ArLogin, ArPasswort) VALUES (" + "'"
 					+ nachname + "', '" + vorname + "', '" + titel + "', '" 
@@ -125,7 +125,7 @@ public class DatenbankAnbindung {
 			}
 			con = DriverManager.getConnection(
 					// "jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/DatenbankJuelide.db");
 			st = con.createStatement();
 			result = st.executeQuery("SELECT * FROM ArArzt WHERE ArLogin = '" + username + "';");
 
@@ -214,7 +214,7 @@ public class DatenbankAnbindung {
 
 			con = DriverManager.getConnection(
 					// "jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/DatenbankJuelide.db");
 			st = con.createStatement();
 			result = st.executeQuery("SELECT MAX (StammID) FROM StammBogen;");
 
@@ -254,7 +254,7 @@ public class DatenbankAnbindung {
 			}
 			con = DriverManager.getConnection(
 					// "jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/DatenbankJuelide.db");
 			st = con.createStatement();
 			st.executeUpdate(
 					"INSERT INTO StammBogen (StammNachname, StammVorname, StammGeburtstag, StammGeschlecht, StammStrasse, StammPLZ, StammOrt)"
@@ -282,7 +282,7 @@ public class DatenbankAnbindung {
 			}
 			con = DriverManager.getConnection(
 					// "jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/DatenbankJuelide.db");
 			st = con.createStatement();
 			st.executeUpdate("INSERT INTO BewegBogen (StammBewegID) VALUES ('" + stammID + "');");
 
@@ -308,7 +308,7 @@ public class DatenbankAnbindung {
 			}
 			con = DriverManager.getConnection(
 					// "jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/DatenbankJuelide.db");
 			st = con.createStatement();
 			st.executeUpdate(
 					"INSERT INTO AnAntwort (AnInhalt, BewegAnID) VALUES ('" + antwort + "', '" + bewegID + "');");
@@ -333,7 +333,7 @@ public class DatenbankAnbindung {
 				e.printStackTrace();
 			}
 			con = DriverManager.getConnection(
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/DatenbankJuelide.db");
 			st = con.createStatement();
 			result = st.executeQuery("SELECT ArTitel, ArNachname, ArStrasse, ArHausnummer, ArOrt FROM ArArzt;");
 
@@ -364,7 +364,7 @@ public class DatenbankAnbindung {
 				e.printStackTrace();
 			}
 			con = DriverManager.getConnection(
-					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/DatenbankJuelide.db");
 			st = con.createStatement();
 			result = st.executeQuery("SELECT ArAccount;");
 

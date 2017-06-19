@@ -22,11 +22,17 @@ public class RegistrierenServlet extends AbstractServlet {
 		String vorname = request.getParameter("Vorname");
 		String nachname = request.getParameter("Nachname");
 		String titel = request.getParameter("Titel");
-		String username = request.getParameter("Account-Name");
-		String passwort = request.getParameter("Passwort");
+		String institution = request.getParameter("Institution");
+		String strasse = request.getParameter("Strasse");
+		String plz = request.getParameter("PLZ");
+		String ort = request.getParameter("Ort");
+		String hausnummer = request.getParameter("Hausnummer");
+		String email = request.getParameter("E-Mail");
+		String username = request.getParameter("Account");
+		String passwort = request.getParameter("Passwort2");
 
 		DatenbankAnbindung dba = new DatenbankAnbindung();
-		dba.addArzt(vorname, nachname, titel, username, passwort);
+		dba.addArzt(vorname, nachname, titel, institution, strasse, plz, ort, hausnummer, email, username, passwort);
 
 		response.setContentType("text/html");
 		PrintWriter writer = response.getWriter();

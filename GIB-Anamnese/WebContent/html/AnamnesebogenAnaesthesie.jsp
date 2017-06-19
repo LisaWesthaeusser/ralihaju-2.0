@@ -526,7 +526,7 @@
 				
 				<div class="frage">Welchem Arzt möchten Sie Ihren Anamnesebogen senden?</div>
 								<div class="antwort">
-					<select name="anWelchenArzt">
+					<select name="anWelchenArzt" required>
 				<% 	DatenbankAnbindung dba = new DatenbankAnbindung();
 					List<String> list = dba.selectAerzte();
 					for(int i = 0; i < list.size(); i++){

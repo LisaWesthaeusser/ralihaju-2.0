@@ -9,6 +9,7 @@ import com.aspose.barcode.barcoderecognition.BarCodeReadType;
 import com.aspose.barcode.barcoderecognition.BarCodeReader;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.Barcode;
 import com.lowagie.text.pdf.BarcodeEAN;
@@ -28,20 +29,25 @@ public class PDF_Generierung {
 			PdfContentByte content = writer.getDirectContent();
 			BarcodeEAN barcode = new BarcodeEAN();
 			String barcodeID = "" + bogen.getId();
-			barcode.setCode(barcodeID);
-			barcode.setCodeType(Barcode.UPCA);
-//			BarCodeBuilder builder = new BarCodeBuilder(Symbology.Code39Standard + barcodeID);
-//			builder.save("C:/Users/Jülide/Desktop/test.jpg");
+//			barcode.setCode(barcodeID);
+			barcode.setCodeType(Barcode.EAN13);
+			
+			BarCodeBuilder builder = new BarCodeBuilder(Symbology.Code39Standard + barcodeID);
+			barcode.setCode(Symbology.Code39Standard + barcodeID);
+			builder.save("C:/Users/Jülide/Desktop/test.jpg");
 //			BarCodeReader reader = new BarCodeReader("C:/Users/Jülide/Desktop/test.jpg", BarCodeReadType.Code39Standard);
 //			while(reader.read()){
 //				reader.getCodeText();
 //			}
 //			reader.close();
 //			System.out.println(reader);
+			
+			Image img = barcode.createImageWithBarcode(content, Color.BLACK, Color.BLACK);
 
 			document.add(new Paragraph("Anamnesebogen"));
-			document.add(barcode.createImageWithBarcode(content, Color.BLACK, Color.BLACK));
-
+//			document.add(barcode.createImageWithBarcode(content, Color.BLACK, Color.BLACK));
+			document.add(img);
+			
 			// System.out.println(document);
 
 			document.add(new Paragraph(inhaltText));

@@ -2,7 +2,11 @@ package htwg.in.gib.anam.control;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +22,19 @@ import htwg.in.gib.anam.model.PDF_Generierung;
 @SuppressWarnings("serial")
 @WebServlet("/GIB-Anamnese/anamnesebogenAnaesthesie")
 public class AnamnesebogenAServlet extends AbstractServlet {
+	
+	@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        DatenbankAnbindung dba = new DatenbankAnbindung();
+		List<String> aerzte = dba.selectAerzte();
+		request.setAttribute("aerzte", aerzte); // Will be available as ${products} in JSP
+		
+		response.setContentType( "text/html" );
+	    PrintWriter out = response.getWriter();
+	    ServletContext con = getServletContext();
+		RequestDispatcher view = request.getRequestDispatcher("WebContent/html/AnamnesebogenAnaesthesie.jsp");
+		view.forward(request, response);
+    }
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -79,15 +96,9 @@ public class AnamnesebogenAServlet extends AbstractServlet {
 		String nachricht003 = req.getParameter("Nachricht03");
 
 		Bogen bogen = new Bogen();
-		// String bogenId = req.getParameter("Vorname");
 		DatenbankAnbindung dba = new DatenbankAnbindung();
-//		dba.addAnaesthesieBogenStammDaten(vorname, nachname, geschlecht, gebDat, strasse, plz, antwort023);
 		dba.addAnaesthesiebogen(vorname, nachname, geschlecht, gebDat, strasse, plz, ort, antwort002);
 		bogen.setId(dba.sucheNachMaxIDinDB("StammID", "StammBogen"));
-
-		// bogen = dba.readBogen("1");
-
-		// String frage = bogen.getFrage1();
 
 		resp.setContentType("application/pdf");
 		String htmlResp = "";

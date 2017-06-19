@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatenbankAnbindung {
 
@@ -309,7 +311,44 @@ public class DatenbankAnbindung {
 			e.printStackTrace();
 		}
 	}
+	
+	public List<String> selectAerzte(){
+		
+		List<String> aerzte = new ArrayList<String>(); 
+		try {
 
+			try {
+				Class.forName("org.sqlite.JDBC");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			con = DriverManager.getConnection(
+					"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
+			st = con.createStatement();
+			result = st.executeQuery(
+					"SELECT ArTitel, ArNachname, ArStrasse, ArOrt FROM ArArzt;");
+			
+			while(result.next()){
+				String arzt = new String();
+				arzt = result.getString("ArTitel") + " " 
+					 + result.getString("ArNachname") + ", "
+					 + result.getString("ArStrasse") + ", "
+					 + result.getString("ArOrt") + ".";
+				aerzte.add(arzt);
+			}
+			
+			con.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return aerzte;
+	}
+
+	
 	public void addAnaesthesiebogen(String vorname, String nachname, String geschlecht, String gebDat, String strasse,
 			String plz, String ort, String antwort) {
 		addAnaesthesieBogenStammDaten(vorname, nachname, geschlecht, gebDat, strasse, plz, ort);

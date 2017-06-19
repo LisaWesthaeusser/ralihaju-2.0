@@ -269,7 +269,7 @@ public class DatenbankAnbindung {
 		}
 	}
 
-	public void addAnaesthesieBogenBewegDaten() {
+	public void addAnaesthesieBogenBewegDaten(String arzt) {
 		String stammID = sucheNachMaxIDinDB("StammID", "StammBogen");
 
 		try {
@@ -284,7 +284,7 @@ public class DatenbankAnbindung {
 					// "jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db");
 					"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/DatenbankJuelide.db");
 			st = con.createStatement();
-			st.executeUpdate("INSERT INTO BewegBogen (StammBewegID) VALUES ('" + stammID + "');");
+			st.executeUpdate("INSERT INTO BewegBogen (StammBewegID, ArBewegID) VALUES ('" + stammID + "', '" + arzt + "');");
 
 			con.close();
 
@@ -384,9 +384,9 @@ public class DatenbankAnbindung {
 	}
 
 	public void addAnaesthesiebogen(String vorname, String nachname, String geschlecht, String gebDat, String strasse,
-			String plz, String ort, String antwort) {
+			String plz, String ort, String antwort, String arzt) {
 		addAnaesthesieBogenStammDaten(vorname, nachname, geschlecht, gebDat, strasse, plz, ort);
-		addAnaesthesieBogenBewegDaten();
+		addAnaesthesieBogenBewegDaten(arzt);
 		addAnaesthesieBogenBewegDatenAntworten(antwort);
 	}
 }

@@ -32,7 +32,7 @@ public class RegistrierenServlet extends AbstractServlet {
 		String passwort = request.getParameter("Passwort2");
 
 		DatenbankAnbindung dba = new DatenbankAnbindung();
-		dba.addArzt(vorname, nachname, titel, institution, strasse, plz, ort, hausnummer, email, username, passwort);
+		dba.addArzt(vorname, nachname, titel, institution, strasse, hausnummer, plz, ort, email, username, passwort);
 
 		response.setContentType("text/html");
 		PrintWriter writer = response.getWriter();

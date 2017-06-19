@@ -23,6 +23,25 @@ import htwg.in.gib.anam.model.PDF_Generierung;
 @WebServlet("/GIB-Anamnese/anamnesebogenAnaesthesie")
 public class AnamnesebogenAServlet extends AbstractServlet {
 	
+	public String nurArztID(String arztText){
+		String arztID = "";
+		char[] chars = new char[arztText.length()];
+		boolean test = false;
+		arztText.getChars(0, arztText.length(), chars, 0);
+		for(int i = 0; i < chars.length; i++){
+			if(chars[i] == ')'){
+				test = false;				
+			} 
+			if(test == true){
+				arztID += chars[i];
+			}
+			if(chars[i] == '('){
+				test = true;
+			}		
+		}
+		return arztID;
+	}
+	
 	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DatenbankAnbindung dba = new DatenbankAnbindung();
@@ -94,10 +113,11 @@ public class AnamnesebogenAServlet extends AbstractServlet {
 		String nachricht001 = req.getParameter("Nachricht01");
 		String nachricht002 = req.getParameter("Nachricht02");
 		String nachricht003 = req.getParameter("Nachricht03");
-		String azrt = req.getParameter("anWelchenArzt");
+		String arzt = req.getParameter("anWelchenArzt");
 
 		Bogen bogen = new Bogen();
 		DatenbankAnbindung dba = new DatenbankAnbindung();
+		arzt = nurArztID(arzt);
 		dba.addAnaesthesiebogen(vorname, nachname, geschlecht, gebDat, strasse, plz, ort, antwort002, arzt);
 		bogen.setId(dba.sucheNachMaxIDinDB("StammID", "StammBogen"));
 
@@ -112,9 +132,4 @@ public class AnamnesebogenAServlet extends AbstractServlet {
 		OutputStream os = resp.getOutputStream();
 		PDF_Generierung.pdfGenerieren(htmlResp, os, bogen);
 	}
-//public static void main(String[] args) {
-//	
-//	DatenbankAnbindung dba = new DatenbankAnbindung();
-//	dba.addAnaesthesiebogen("123", "123", "12", "123", "123", "12", "123", "1234");
-//}
 }

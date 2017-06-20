@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.aspose.barcode.internal.h.da;
+
 public class DatenbankAnbindung {
 
 	ResultSet result = null;
@@ -15,7 +17,7 @@ public class DatenbankAnbindung {
 	Connection con = null;
 	String kette = null;
 
-	String pfad = //"jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db";
+	String pfad = // "jdbc:sqlite:C:/Users/Jülide/git/ralihaju-2.0/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db";
 			"jdbc:sqlite:C:/Users/Lisa/git/ralihaju2/GIB-Anamnese/WebContent/WEB-INF/Datenbank.db";
 
 	public String sucheNachMaxIDinDB(String spalteMitID, String tabelle) {
@@ -246,7 +248,7 @@ public class DatenbankAnbindung {
 	}
 
 	public List<String> selectBoegenEinesAccounts(String arztID) {
-		List<String> fragen = new ArrayList<String>();
+		List<String> bewegIDs = new ArrayList<String>();
 		try {
 			try {
 				Class.forName("org.sqlite.JDBC");
@@ -256,14 +258,13 @@ public class DatenbankAnbindung {
 			}
 			con = DriverManager.getConnection(pfad);
 			st = con.createStatement();
-			result = st.executeQuery("SELECT FrAnID, AnInhalt FROM BewegBogen INNER JOIN ArArzt "
-					+ "ON BewegBogen.ArBewegID = ArArzt.ArID INNER JOIN AnAntwort "
-					+ "ON BewegBogen.BewegBoID = AnAntwort.BewegAnID" + "WHERE ArID = " + arztID + ";");
+			result = st.executeQuery("SELECT BewegBoID FROM BewegBogen INNER JOIN ArArzt "
+					+ "ON BewegBogen.ArBewegID = ArArzt.ArID " + "WHERE ArID = " + arztID + ";");
 
 			while (result.next()) {
-				String frage = new String();
-				frage = result.getString("AnInhalt");
-				fragen.add(frage);
+				String bewegID = new String();
+				bewegID = result.getString("BewegBoID");
+				bewegIDs.add(bewegID);
 			}
 			con.close();
 
@@ -272,6 +273,67 @@ public class DatenbankAnbindung {
 			e.printStackTrace();
 		}
 
-		return fragen;
+		return bewegIDs;
+	}
+
+	public List<String> selectInhalteinesBogens(String bewegBoID) {
+		List<String> inhalte = new ArrayList<String>();
+		try {
+			try {
+				Class.forName("org.sqlite.JDBC");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			con = DriverManager.getConnection(pfad);
+			st = con.createStatement();
+			result = st.executeQuery("SELECT AnInhalt, FrAnID, BewegBoID FROM BewegBogen "
+					+ "INNER JOIN AnAntwort ON BewegBogen.BewegBoID = AnAntwort.BewegAnID "
+					+ "WHERE BewegBoID = " + bewegBoID + ";");
+
+			while (result.next()) {
+				String inhalt = new String();
+				inhalt = result.getString("AnInhalt");
+				inhalte.add(inhalt);
+			}
+			con.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return inhalte;
+	}
+
+	public String selectArIDByLogin(String login) {
+		String id = "";
+		try {
+			try {
+				Class.forName("org.sqlite.JDBC");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			con = DriverManager.getConnection(pfad);
+			st = con.createStatement();
+			result = st.executeQuery("SELECT ArID FROM ArArzt WHERE ArLogin = '" + login + "';");
+
+			if (result.next()) {
+				id = result.getString("ArID");
+			}
+			con.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return id;
+	}
+	
+	public static void main(String[] args) {
+		DatenbankAnbindung dba = new DatenbankAnbindung();
+		dba.selectInhalteinesBogens("1000000000089");
 	}
 }

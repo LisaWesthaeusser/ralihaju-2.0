@@ -27,12 +27,20 @@
     <servlet-name>AnamnesebogenOServlet</servlet-name>
     <url-pattern>/anamnesebogenOrthopaedie</url-pattern>
   </servlet-mapping>
-      <servlet>
+  <servlet>
     <servlet-name>RegistrierenServlet</servlet-name>
     <servlet-class>htwg.in.gib.anam.control.RegistrierenServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RegistrierenServlet</servlet-name>
     <url-pattern>/registrieren</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>AbrufenServlet</servlet-name>
+    <servlet-class>htwg.in.gib.anam.control.AbrufenServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AbrufenServlet</servlet-name>
+    <url-pattern>/abrufen</url-pattern>
   </servlet-mapping>
 </web-app>

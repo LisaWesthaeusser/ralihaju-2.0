@@ -22,9 +22,9 @@
 				<button class="tablinks" onclick="openTab(event, 'Anamnesebogen')">Anamnesebogen</button>
 			</a> <a href=/GIB-Anamnese/html/Kontakt.html>
 				<button class="tablinks" onclick="openTab(event, 'Kontakt')">Kontakt</button>
-			</a> <a href=/GIB-Anamnese/Impressum.html><button class="tablinks"
-					onclick="openTab(event, 'Impressum')">Impressum</button></a> <a
-				href=/GIB-Anamnese/Arzt.html>
+			</a> <a href=/GIB-Anamnese/html/Impressum.html><button
+					class="tablinks" onclick="openTab(event, 'Impressum')">Impressum</button></a>
+			<a href=/GIB-Anamnese/html/Arzt.html>
 				<button class="tablinks" onclick="openTab(event, 'Arzt')">Arzt</button>
 			</a>
 
@@ -35,30 +35,30 @@
 
 		<form>
 			<div id="anamneseliste">
-				Neue Anamnesen: <br>
-				<br>
-				<br>
+				Neue Anamnesen: <br> <br> <br>
 
 			</div>
 			<div class="antwort">
+			<table>
 				<%
+					String id = (String) request.getAttribute("variable");
 					DatenbankAnbindung dba = new DatenbankAnbindung();
-					List<String> list = dba.selectBoegenEinesAccounts(arztID);
-					for (int i = 0; i < list.size(); i++) {
-						String bogen = list.get(i);
+					List<String> ids = dba.selectBoegenEinesAccounts(id);
+					int size = ids.size();
+					for (int i = 0; i < size; i++) {
+						String abc = ids.get(i);
+						List<String> grunddaten = dba.selectInhalteinesBogens(abc);
+						String daten = grunddaten.get(1) + ", " + grunddaten.get(0) + ": geb. am: " + grunddaten.get(3);
 				%>
-				<a name="bogen<%=i%>"><%=bogen%>nachname-vorname-gebDat</a>
+				<tr><td><%=daten%>: </td><td><a href="/GIB-Anamnese/abrufen" name="parameter"> <%=abc%> </a></td></a>
+				
+				<br>
+				<br>
 				<%
 					}
 				%>
-
-				<br> <br>
-
-				<button id="herunterladen">Alle Herunterladen</button>
-				<button id="löschen">Alle löschen</button>
-				<button id="markieren">Alle markieren</button>
-				<button id="markierterunterladen">Markierte herunterladen</button>
-				<br> <br> <br> <br>
+</table>
+				</a> <br> <br>
 			</div>
 
 

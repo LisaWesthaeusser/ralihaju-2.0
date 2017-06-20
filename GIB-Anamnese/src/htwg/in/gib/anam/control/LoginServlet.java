@@ -29,8 +29,9 @@ public class LoginServlet extends AbstractServlet {
 		passwortVergleich = dba.sucheBenutzer(username);
 
 		if(passwort.equals(passwortVergleich)){
-					
-		response.setContentType("text/html");
+		
+		String id = dba.selectArIDByLogin(username);
+		request.setAttribute("variable", id);
 		RequestDispatcher view = request.getRequestDispatcher("html/Arzt.jsp");
 		view.forward(request, response);
 	

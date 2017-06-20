@@ -55,36 +55,33 @@ public class AnamnesebogenAServlet extends AbstractServlet {
 		antworten.add(req.getParameter("Ort"));
 		antworten.add(req.getParameter("Beruf"));
 		antworten.add(req.getParameter("Antwort002"));
+		antworten.add(req.getParameter("nachricht001"));
 		antworten.add(req.getParameter("Antwort003"));
-		antworten.add(req.getParameter("Antwort004"));
-		antworten.add(req.getParameter("Antwort005"));
 		antworten.add(req.getParameter("Frage001"));
+		antworten.add(req.getParameter("Antwort004"));
 		antworten.add(req.getParameter("Frage002"));
-		antworten.add(req.getParameter("Frage003"));
+		antworten.add(req.getParameter("Antwort005"));
 		antworten.add(req.getParameter("Frage003"));
 
 		String arzt = req.getParameter("anWelchenArzt");
 
 		Bogen bogen = new Bogen();
 		DatenbankAnbindung dba = new DatenbankAnbindung();
-		// int arztID = Integer.parseInt(nurArztID(arzt));
 		dba.addAnaesthesieBogenBewegBogen(1);
 
 		for (int i = 0; i < antworten.size(); i++) {
-			dba.addAnaesthesieBogenBewegDatenAntworten(antworten.get(i), "" + i);
+			dba.addAnaesthesieBogenBewegDatenAntworten(antworten.get(i), "" + (i+1));
 		}
 
 		 bogen.setId(dba.sucheNachMaxIDinDB("BewegBoID", "BewegBogen"));
 
 		resp.setContentType("application/pdf");
-//
-//		PrintWriter w = resp.getWriter();
 		String htmlResp = "";
 
 		List<String> fragen = dba.selectFragen();
 
 		for (int i = 0; i < fragen.size(); i++) {
-			htmlResp += "<h2>" + fragen.get(i) + ":<br>" + (antworten.get(i) + 1) + "<br><br> </h2>";
+			htmlResp += fragen.get(i) + ":\n" + antworten.get(i) + "\n\n";
 		}
 
 		OutputStream os = resp.getOutputStream();

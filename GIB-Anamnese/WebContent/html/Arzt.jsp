@@ -29,35 +29,44 @@
 			</a>
 
 		</div>
-		<br>
+		
+<br>
 
 
-
-		<form>
+		<form  name="absenden" method="post" action="/GIB-Anamnese/abrufen">
 			<div id="anamneseliste">
-				Neue Anamnesen: <br> <br> <br>
-
+				Neue Anamnesen:
 			</div>
 			<div class="antwort">
-			<table>
-				<%
-					String id = (String) request.getAttribute("variable");
-					DatenbankAnbindung dba = new DatenbankAnbindung();
-					List<String> ids = dba.selectBoegenEinesAccounts(id);
-					int size = ids.size();
-					for (int i = 0; i < size; i++) {
-						String abc = ids.get(i);
-						List<String> grunddaten = dba.selectInhalteinesBogens(abc);
-						String daten = grunddaten.get(1) + ", " + grunddaten.get(0) + ": geb. am: " + grunddaten.get(3);
-				%>
-				<tr><td><%=daten%>: </td><td><a href="/GIB-Anamnese/abrufen" name="parameter"> <%=abc%> </a></td></a>
-				
-				<br>
-				<br>
-				<%
-					}
-				%>
-</table>
+				<form>
+					<table>
+						<%
+							String id = (String) request.getAttribute("variable");
+							DatenbankAnbindung dba = new DatenbankAnbindung();
+							List<String> ids = dba.selectBoegenEinesAccounts(id);
+							int size = ids.size();
+							for (int i = 0; i < size; i++) {
+								String abc = ids.get(i);
+								List<String> grunddaten = dba.selectInhalteinesBogens(abc);
+								String daten = grunddaten.get(1) + ", " + grunddaten.get(0) + ": geb. am: " + grunddaten.get(3);
+						%>
+						<tr>
+							
+
+							<td><input type="radio" name="parameter" value="<%=abc%>">
+								<%=abc%> </input></td>
+															<td></td>
+								<td><%=daten%>:</td>
+
+							<br>
+							<br>
+							<%
+								}
+							%>
+						
+					</table>
+					<input id="senden" type="submit" value="Bogen aufrufen">
+				</form>
 				</a> <br> <br>
 			</div>
 

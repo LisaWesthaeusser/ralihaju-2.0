@@ -17,28 +17,8 @@ import htwg.in.gib.anam.model.PDF_Generierung;
  * Servlet implementation class AbrufenServlet
  */
 @WebServlet("/GIB-Anamnese/AbrufenServlet")
-public class AbrufenServlet extends HttpServlet {
+public class AbrufenServlet extends AbstractServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public AbrufenServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
-		String bewegID = request.getParameter("parameter");
-		Bogen bogen = new Bogen();
-		bogen.setId(bewegID);
-
-		resp.setContentType("application/pdf");
-		String htmlResp = "";
-
-		OutputStream os = resp.getOutputStream();
-		PDF_Generierung.pdfGenerieren(htmlResp, os, bogen);
-	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
 		String bewegID = request.getParameter("parameter");
@@ -48,7 +28,7 @@ public class AbrufenServlet extends HttpServlet {
 
 		resp.setContentType("application/pdf");
 		String htmlResp = "";
-		
+
 		List<String> fragen = dba.selectFragen();
 		List<String> antworten = dba.selectInhalteinesBogens(bewegID);
 
